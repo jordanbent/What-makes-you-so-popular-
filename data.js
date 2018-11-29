@@ -1,9 +1,13 @@
 const octokit = require('@octokit/rest')()
-//var octonode = require('cs3012-final/node_modules/octonode/lib/octonode/Client.js');
-//var client = octonode.client("3b366435a0ac5e52059f35c71f3b18431ea8bbed");
 const fs = require('fs');
 
-per_page = 100;
+octokit.authenticate({
+    type: 'token',
+    token: '3b366435a0ac5e52059f35c71f3b18431ea8bbed'
+})
+
+
+per_page = 10;
 var count = 0 ;
 var bio = 0;
 
@@ -23,6 +27,12 @@ function get(s)
                 result_starred = octokit.activity.listReposStarredByUser({username, per_page});        
                 result_orgs = octokit.orgs.listForUser({username, per_page});  
                 result_repos = octokit.repos.listForUser({username, per_page});     
+                
+                console.log(result_followers);
+                console.log(result_followering.length);
+                console.log(result_starred.length);
+                console.log(result_orgs.length);
+                console.log(result_repos.length);
 
                 fs.appendFileSync('./UserData.csv',
                 result_followers.length + "," +
