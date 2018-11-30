@@ -6,43 +6,43 @@ octokit.authenticate({
     token: '3b366435a0ac5e52059f35c71f3b18431ea8bbed'
 })
 
+per_page = 100;
+no_of_pages = 5;
 
-per_page = 10;
-var count = 0 ;
-var bio = 0;
+async function get(s)
+{
+    fs.appendFileSync('./FollowersData.csv',"username,total\n");
+    fs.appendFileSync('./FollowingData.csv',"username,total\n");
+    fs.appendFileSync('./StarredData.csv',"username,total\n");
+    fs.appendFileSync('./OrgsData.csv',"username,total\n");
+    fs.appendFileSync('./ReposData.csv',"username,total,reponame,size,stargazers,language\n");
 
-function get(s)
-{   
-    fs.appendFileSync('./UserData.csv',"followers,following,starred,orgs,repos\n");
-    fs.appendFileSync('./FollowersData.csv',"number of, ")
-    for(var no_of_pages = 0; no_of_pages < 2; no_of_pages++)
+    for(var k = 0; k < no_of_pages; k++)
     {
-        octokit.users.list({since: (no_of_pages*100), per_page}).then(body => 
-        {   
-            for(var i = 0; i < per_page; i++)
+        const users = await octokit.users.list({since: (k*per_page), per_page}); 
+
+        for(var i = 0; i < per_page; i++)
+        {
+            var username = users.data[i].login;
+            const followers = await octokit.users.listFollowersForUser({username, per_page});
+            fs.appendFileSync('./FollowersData.csv',username+","+followers.data.length+"\n");
+
+            const following = await octokit.users.listFollowingForUser({username, per_page});
+            fs.appendFileSync('./FollowingData.csv',username+","+following.data.length+"\n");
+
+            const starred = await octokit.activity.listReposStarredByUser({username, per_page});
+            fs.appendFileSync('./StarredData.csv',username+","+starred.data.length+"\n");
+
+            const orgs = await octokit.orgs.listForUser({username, per_page});
+            fs.appendFileSync('./OrgsData.csv',username+","+orgs.data.length+"\n");
+
+            const repos = await octokit.repos.listForUser({username, per_page});
+            for(var j = 0; j < repos.data.length; j++)
             {
-                username = body.data[i].login;
-                result_followers = octokit.users.listFollowersForUser({username, per_page});        
-                result_followering = octokit.users.listFollowingForUser({username, per_page});        
-                result_starred = octokit.activity.listReposStarredByUser({username, per_page});        
-                result_orgs = octokit.orgs.listForUser({username, per_page});  
-                result_repos = octokit.repos.listForUser({username, per_page});     
-                
-                console.log(result_followers);
-                console.log(result_followering.length);
-                console.log(result_starred.length);
-                console.log(result_orgs.length);
-                console.log(result_repos.length);
-
-                fs.appendFileSync('./UserData.csv',
-                result_followers.length + "," +
-                result_followering.length + "," +
-                result_starred.length + "," +
-                result_orgs.length + "," +
-                result_repos.length + "\n");
-
+                fs.appendFileSync('./ReposData.csv',username+","+repos.data.length+","+repos.data[j].name+","+repos.data[j].size+","+
+                repos.data[j].stargazers_count+","+repos.data[j].languages+"\n");
             }
-        }).catch(function(e){console.log(e)});
+        }
     }
 }
 
