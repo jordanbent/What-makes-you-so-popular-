@@ -7,7 +7,7 @@ octokit.authenticate({
 })
 
 per_page = 100;
-no_of_pages = 5;
+no_of_pages = 2;
 
 async function get(s)
 {
@@ -16,13 +16,16 @@ async function get(s)
     fs.appendFileSync('./StarredData.csv',"username,total\n");
     fs.appendFileSync('./OrgsData.csv',"username,total\n");
     fs.appendFileSync('./ReposData.csv',"username,total,reponame,size,stargazers,language\n");
-
+    counter = 0;
+    
     for(var k = 0; k < no_of_pages; k++)
     {
         const users = await octokit.users.list({since: (k*per_page), per_page}); 
 
         for(var i = 0; i < per_page; i++)
         {
+            console.log("ew ",counter++);
+
             var username = users.data[i].login;
             const followers = await octokit.users.listFollowersForUser({username, per_page});
             fs.appendFileSync('./FollowersData.csv',username+","+followers.data.length+"\n");
