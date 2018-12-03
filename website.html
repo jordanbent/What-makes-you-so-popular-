@@ -10,18 +10,24 @@
 
 <body>
 
-    <h1 style="color:#3532318a;" style="text-align:center;">What makes you so <i>popular?</i></h1>
+    <h1 style="color: #302e2d8a;" style="text-align:center;">What makes you so <i>popular?</i></h1>
 <!-- Tab links -->
     <div class="tab">
-    <button class="tablinks" onclick="window.location.href='/website.html'">Total</button>
-    <button class="tablinks" onclick="window.location.href='/size.html'">Size</button>
-    <button class="tablinks" onclick="window.location.href='/stars.html'">Stars</button>
+    <button class="tablinks" onclick="window.location.href='/website.html'">Number of Repositories</button>
+    <button class="tablinks" onclick="window.location.href='/size.html'">Average Size</button>
+    <button class="tablinks" onclick="window.location.href='/stars.html'">Average Number of Stargazers</button>
     </div>
 
     <!-- Tab content -->
     <div id="Repos Total">
-    <h3>Total</h3>
-    <p>Number of Followers a user has (x) vs Number of Repos the user has (y)</p>
+    <h3>Number of Repositories</h3>
+    <p><b>This graph compares the number of followers a GitHub user has, indicated on the y-axis,
+        against the total number of repositories the same GitHub user has, indicated on the x-axis.
+
+        <i><br>If you hover over the dots on the graph the GitHub username appears, along with that users 
+            total number of followers and total number of repositories. 
+            <br>All data displayed has been retrieved from the GitHub API.</i></b>
+    </p>
     </div>
 
     <script src="http://d3js.org/d3.v3.min.js"></script>

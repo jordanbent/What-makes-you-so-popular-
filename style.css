@@ -4,27 +4,24 @@ body {
     background: linear-gradient(to right, #94716B, #B79891); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     
     font: 18px courier;
-}
+    color: #302e2d8a;
 
-h1 {
-    color: navy;
-    margin-left: 20px;
+    padding: 30px;
 }
-
 .tab {
-
+    border-radius: 15px;
     overflow: hidden;
     border: none;
-    background-color: rgba(189, 162, 148, 0.521);
+    background-color: #B79891;
 }
 
 .tab button {
-    background-color: #f0aa87bb;
+    background-color: rgba(204, 192, 189, 0.658);
     border: none;
-    outline: rgba(189, 162, 148, 0.521);
+    outline: none;
     cursor: pointer;
     transition: 0.3s;
-    color: darkslategrey;
+    color: #3532318a;
     padding: 20px, 5px;
     text-align: center;
     text-decoration: none;
@@ -32,21 +29,22 @@ h1 {
     font-size: 16px;
     width: 32.8%;
     height: 25px; 
+    border-radius: 15px;
 }
 
 .tab button:hover {
-    background-color: rgba(189, 162, 148, 0.521);
+    background-color: rgba(183, 152, 145, 0.507);
 }
 
 .tab button.active {
-    background-color: rgba(189, 162, 148, 0.521);
+    background-color:  rgba(183, 152, 145, 0.507);
 }
 
 .tabcontent {
     display: none;
     padding: 6px 12px;
     border: none;
-    border-top: rgba(189, 162, 148, 0.521);
+    border-top:  rgba(183, 152, 145, 0.507);
 }
 
 .axis path,
@@ -56,8 +54,8 @@ h1 {
   shape-rendering: crispEdges;
 }
 .dot {
-  stroke: #b59e94;
-  fill: #e5a88b
+  stroke: rgb(209, 197, 194);
+  fill: rgb(209, 197, 194);
 }
 .tooltip {
   position: absolute;
